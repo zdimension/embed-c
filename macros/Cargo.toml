@@ -3,7 +3,13 @@ name = "embed-c-macros"
 version = "0.1.0"
 authors = ["Tom Niget <niget.tom@gmail.com>"]
 description = "Macros for the `embed-c` crate"
+homepage = "https://github.com/zdimension/embed-c"
+repository = "https://github.com/zdimension/embed-c"
+documentation = "https://docs.rs/embed-c"
+licence = "MIT OR Apache-2.0"
 edition = "2018"
+readme = "README.md"
+keywords = ["embed", "c", "rust", "c2rust", "clang", "llvm"]
 
 [lib]
 proc-macro = true
