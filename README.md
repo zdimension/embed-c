@@ -13,25 +13,35 @@ git submodule update --init c2rust
 cp Cargo.lock ..
 cd ..
 ```
-and this `Cargo.toml`:
+and add this to your `Cargo.toml`:
 ```toml
 [dependencies]
-embed-c-macros = { path = "./embed-c/macros", version = "0.1" }
+embed-c = { path = "./embed-c", version = "0.1" }
 
 [patch.crates-io]
 c2rust-transpile = { path = "./embed-c/c2rust/c2rust-transpile" }
 ```
 
 
-
-**NOTE:** this crate is designed to work for the `nightly-2019-12-05` version of Rust, so put this in your `rust-toolchain.toml`:
+**NOTE:** this crate is designed to work for the `nightly-2019-12-05` version of Rust, 
+so put this in your `rust-toolchain.toml`:
 ```toml
 [toolchain]
 channel = "nightly-2019-12-05"
 ```
+And change the `package.edition` setting in your `Cargo.toml` to be "2018":
+```toml
+[package]
+edition = "2018"
+```
+
+If you get errors about the `matches!` macro, or from the `half` or `rustc_demangle` crates, copy the `Cargo.lock`
+file to your project root again.
 
 ## Basic usage
 ```rust
+#![feature(rustc_private)] 
+
 use embed_c::embed_c;
 
 embed_c! {
@@ -46,7 +56,39 @@ fn main() {
 }
 ```
 
+The `#![feature(rustc_private)]` bit is required since the crate uses internal features while not being loaded 
+from crates.io.
+
 See more examples in [src/lib.rs](src/lib.rs).
+
+```rust
+embed_c! {
+    void send(to, from, count)
+        register short *to, *from;
+        register count;
+    {
+        register n = (count + 7) / 8;
+        switch (count % 8) {
+        case 0: do { *to++ = *from++;
+        case 7:      *to++ = *from++;
+        case 6:      *to++ = *from++;
+        case 5:      *to++ = *from++;
+        case 4:      *to++ = *from++;
+        case 3:      *to++ = *from++;
+        case 2:      *to++ = *from++;
+        case 1:      *to++ = *from++;
+                } while (--n > 0);
+        }
+    }
+}
+
+fn main() {
+    let mut source = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    let mut dest = [0; 10];
+    unsafe { send(dest.as_mut_ptr(), source.as_mut_ptr(), 10); };
+    assert_eq!(source, dest);
+}
+```
 
 ## Limitations
 Many

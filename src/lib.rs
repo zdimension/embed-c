@@ -2,14 +2,6 @@
 //! translated into Rust code at compile time using [C2Rust](https://github.com/immunant/c2rust),
 //! which means that it is fully interoperable with Rust. C code can call Rust code, and vice-versa.
 //!
-//! ### Install
-//! The library is not yet on crates.io. Clone the repository somewhere and add it as a dependency
-//! to your `Cargo.toml`:
-//! ```toml
-//! [dependencies]
-//! embed-c = { path = "./embed-c", version = "0.1" }
-//! ```
-//!
 //! ### Basic usage
 //! ```rust
 //! use embed_c::embed_c;
