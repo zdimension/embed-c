@@ -5,14 +5,30 @@ translated into Rust code at compile time using [C2Rust](https://github.com/immu
 which means that it is fully interoperable with Rust. C code can call Rust code, and vice-versa.
 
 ## Install
-The library is not yet on crates.io. Clone the repository somewhere and add it as a dependency
-to your `Cargo.toml`:
+The library is not yet on crates.io. Clone the repository somewhere and set it up:
+```shell
+git clone https://github.com/zdimension/embed-c.git
+cd embed-c
+git submodule update --init c2rust
+cp Cargo.lock ..
+cd ..
+```
+and this `Cargo.toml`:
 ```toml
 [dependencies]
-embed-c = { path = "./embed-c", version = "0.1" }
+embed-c-macros = { path = "./embed-c/macros", version = "0.1" }
+
+[patch.crates-io]
+c2rust-transpile = { path = "./embed-c/c2rust/c2rust-transpile" }
 ```
 
-**NOTE:** this crate is designed to work for the `nightly-2019-12-05` version of Rust.
+
+
+**NOTE:** this crate is designed to work for the `nightly-2019-12-05` version of Rust, so put this in your `rust-toolchain.toml`:
+```toml
+[toolchain]
+channel = "nightly-2019-12-05"
+```
 
 ## Basic usage
 ```rust

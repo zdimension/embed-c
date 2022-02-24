@@ -52,8 +52,6 @@ pub use embed_c_macros::embed_c;
 #[cfg(test)]
 mod tests
 {
-    extern crate libc;
-
     use embed_c_macros::embed_c;
 
     embed_c!

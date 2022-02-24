@@ -4,6 +4,7 @@ use std::fs;
 use std::path::PathBuf;
 use c2rust_transpile::{ReplaceMode, TranspilerConfig};
 use proc_macro2::TokenStream;
+use quote::quote;
 
 extern crate proc_macro;
 
@@ -82,8 +83,14 @@ pub fn embed_c(input: proc_macro::TokenStream) -> proc_macro::TokenStream
     // Remove inner attributes
     use regex::Regex;
     let re = Regex::new(r"#!\[([^]])*]").unwrap();
-    let final_code = re.replace_all(&converted_code, "");
+    let final_code: proc_macro::TokenStream = re.replace_all(&converted_code, "").parse().unwrap();
 
-    final_code.parse().unwrap()
+    let mut tokens: proc_macro::TokenStream = quote! {
+        extern crate libc;
+    }.into();
+
+    tokens.extend(final_code);
+
+    tokens.into()
 }
 
