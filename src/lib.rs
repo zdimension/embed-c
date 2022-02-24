@@ -3,8 +3,12 @@
 //! which means that it is fully interoperable with Rust. C code can call Rust code, and vice-versa.
 //!
 //! ### Install
-//! Add this to your `Cargo.toml`:
-#![doc = dep_doc::dep_doc!()]
+//! The library is not yet on crates.io. Clone the repository somewhere and add it as a dependency
+//! to your `Cargo.toml`:
+//! ```toml
+//! [dependencies]
+//! embed-c = { path = "./embed-c", version = "0.1" }
+//! ```
 //!
 //! ### Basic usage
 //! ```rust
@@ -21,6 +25,8 @@
 //!     println!("{}", x);
 //! }
 //! ```
+//!
+//! See more examples in [src/lib.rs](src/lib.rs)
 //!
 //! ### Limitations
 //! Many
@@ -39,6 +45,8 @@
 //!
 //! at your option.
 
+#![feature(matches_macro)]
+
 pub use embed_c_macros::embed_c;
 
 #[cfg(test)]
@@ -48,7 +56,8 @@ mod tests
 
     use embed_c_macros::embed_c;
 
-    embed_c! {
+    embed_c!
+    {
         int add(int x, int y)
         {
             return x + y;

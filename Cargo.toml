@@ -6,7 +6,7 @@ description = "Embed C code inside Rust using C2Rust"
 homepage = "https://github.com/zdimension/embed-c"
 repository = "https://github.com/zdimension/embed-c"
 documentation = "https://docs.rs/embed-c"
-licence = "MIT OR Apache-2.0"
+license = "MIT OR Apache-2.0"
 edition = "2018"
 readme = "README.md"
 keywords = ["embed", "c", "rust", "c2rust", "clang", "llvm"]
@@ -14,7 +14,6 @@ keywords = ["embed", "c", "rust", "c2rust", "clang", "llvm"]
 [dependencies]
 embed-c-macros = { path = "./macros", version = "0.1" }
 libc = "0.2"
-dep_doc = "0.1.1"
 
 [patch.crates-io]
 c2rust-transpile = { path = "./c2rust/c2rust-transpile" }

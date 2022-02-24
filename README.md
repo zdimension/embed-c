@@ -5,10 +5,11 @@ translated into Rust code at compile time using [C2Rust](https://github.com/immu
 which means that it is fully interoperable with Rust. C code can call Rust code, and vice-versa.
 
 ## Install
-Add this to your `Cargo.toml`:
+The library is not yet on crates.io. Clone the repository somewhere and add it as a dependency
+to your `Cargo.toml`:
 ```toml
 [dependencies]
-embed-c = "0.1"
+embed-c = { path = "./embed-c", version = "0.1" }
 ```
 
 **NOTE:** this crate is designed to work for the `nightly-2019-12-05` version of Rust.
@@ -28,6 +29,8 @@ fn main() {
     println!("{}", x);
 }
 ```
+
+See more examples in [src/lib.rs](src/lib.rs).
 
 ## Limitations
 Many
