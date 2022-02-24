@@ -1,0 +1,3 @@
+[submodule "c2rust"]
+	path = c2rust
+	url = https://github.com/zdimension/c2rust.git

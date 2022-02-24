@@ -1,0 +1,18 @@
+[package]
+name = "embed-c"
+version = "0.1.0"
+authors = ["Tom Niget <niget.tom@gmail.com>"]
+description = "Embed C code inside Rust using C2Rust"
+edition = "2018"
+
+[dependencies]
+embed-c-macros = { path = "./macros", version = "0.1" }
+libc = "0.2"
+
+[patch.crates-io]
+c2rust-transpile = { path = "./c2rust/c2rust-transpile" }
+
+[workspace]
+members = [
+    "macros"
+]
