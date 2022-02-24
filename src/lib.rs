@@ -4,10 +4,7 @@
 //!
 //! ### Install
 //! Add this to your `Cargo.toml`:
-//! ```toml
-//! [dependencies]
-//! embed-c = "0.1"
-//! ```
+#![doc = dep_doc::dep_doc!()]
 //!
 //! ### Basic usage
 //! ```rust

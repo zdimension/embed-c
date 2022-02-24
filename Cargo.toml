@@ -8,6 +8,7 @@ edition = "2018"
 [dependencies]
 embed-c-macros = { path = "./macros", version = "0.1" }
 libc = "0.2"
+dep_doc = "0.1.1"
 
 [patch.crates-io]
 c2rust-transpile = { path = "./c2rust/c2rust-transpile" }
