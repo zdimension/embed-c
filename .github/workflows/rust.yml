@@ -1,0 +1,22 @@
+name: Rust
+on:
+  push: { branches: ["master"] }
+  pull_request: { branches: ["*"] }
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Rust nightly
+        run: |
+          rustup install nightly-2019-12-05
+          rustup component add rustc-dev --toolchain=nightly-2019-12-05
+      - name: Install build tools and LLVM
+        run: sudo apt install -y build-essential llvm clang libclang-dev libclang-12-dev cmake libssl-dev pkg-config python3
+      - uses: actions/checkout@v2
+      - name: Checkout c2rust
+        run: git submodule update --init c2rust
+      - name: Build
+        run: cargo +nightly-2019-12-05 build --verbose
+      - name: Run tests
+        run: cargo +nightly-2019-12-05 test --verbose
